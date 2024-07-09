@@ -1,6 +1,6 @@
 # Latest-GitHub-Repository-Display
 
-Questo script HTML mostra il link all'ultimo progetto committato su GitHub dall'utente `J0joFra`. Il link viene presentato in un pulsante stilizzato con il logo di GitHub. Quando l'utente fa clic sul pulsante, viene reindirizzato alla repository più recente dell'utente.
+Questo script HTML mostra il link all'ultimo progetto committato su GitHub dall'utente [`J0joFra`]([https://docs.github.com/en/rest](https://github.com/J0joFra)). Il link viene presentato in un pulsante stilizzato con il logo di GitHub. Quando l'utente fa clic sul pulsante, viene reindirizzato alla repository più recente dell'utente.
 
 ## Come funziona
 
@@ -25,3 +25,8 @@ Lo script utilizza il widget di GitHub per ottenere le informazioni sull'ultima 
 ## Licenza
 
 Questo progetto è distribuito sotto la licenza MIT. Puoi fare riferimento al file LICENSE per ulteriori dettagli.
+
+## Collegamenti Utili
+
+- [GitHub API](https://docs.github.com/en/rest) - Documentazione ufficiale delle API di GitHub.
+- [Guida a Google Sites](https://support.google.com/sites/?hl=it) - Informazioni su come utilizzare Google Sites per incorporare contenuti HTML.
