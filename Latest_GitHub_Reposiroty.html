@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimo Progetto Committato</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ff9d0e;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #292421;
+        }
+        #repo-link {
+            font-size: 1.2em;
+            color: #3498db;
+            margin-top: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .github-btn {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 20px;
+        }
+        .github-btn:hover {
+            transform: scale(1.1);
+        }
+        .github-btn img {
+            width: 48px;
+            height: 48px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ultimo Progetto</h1>
+        <div id="repo-link">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <script>
+        async function getLatestRepositoryLink(username) {
+            try {
+                const url = `https://api.github.com/users/${username}/repos`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Errore nel recuperare i dati da GitHub.');
+                }
+                const repos = await response.json();
+                if (repos.length === 0) {
+                    throw new Error('Nessun repository trovato per l\'utente.');
+                }
+                repos.sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+                const latestRepo = repos[0];
+                return latestRepo.html_url;
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        }
+
+        async function displayLatestRepo() {
+            const username = 'J0joFra';
+            const latestRepoLink = await getLatestRepositoryLink(username);
+            const repoLinkDiv = document.getElementById('repo-link');
+            if (latestRepoLink) {
+                repoLinkDiv.innerHTML = `
+                    <button class="github-btn" onclick="window.open('${latestRepoLink}', '_blank')">
+                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
+                    </button>
+                `;
+            } else {
+                repoLinkDiv.textContent = 'Non è stato possibile recuperare l\'ultimo repository committato.';
+            }
+        }
+
+        displayLatestRepo();
+    </script>
+</body>
+</html>
 
